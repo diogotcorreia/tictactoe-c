@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
 //#include <conio.h>
 
 #define ANSI_COLOR_RED "\x1b[31m"
@@ -20,15 +21,18 @@ void clear_screen();
 void rules_instructions();
 void start_board();
 void print_board();
+void start_game();
+void execute_play();
 
 //Main
 
 int main()
 {
-  clear_screen();
+  //clear_screen();
   rules_instructions();
   start_board();
   print_board();
+  start_game();
   return 0;
 }
 
@@ -48,6 +52,10 @@ void rules_instructions()
 //Board array and starting function
 
 char matrix[3][3];
+// Defines which player is playing.
+// false means player 1
+// true means player 2
+bool turn = false;
 
 void start_board()
 {
@@ -92,7 +100,7 @@ void print_board()
       printf("\n---|---|---\n");
     }
   }
-  printf("\n");
+  printf("\n\n");
 }
 
 //Screen clearing function
@@ -107,4 +115,30 @@ void clear_screen()
  * */
 void start_game()
 {
+  // TODO while no one has won or it's a tie, repeat
+  while (true)
+  {
+    execute_play();
+    clear_screen();
+    print_board();
+  }
+  // TODO print winner and end game
+}
+
+void execute_play()
+{
+  int square;
+  printf("Player %d (%c) turn: ", turn ? 2 : 1, turn ? 'O' : 'X');
+  scanf("%d", &square);
+  int row, column;
+  row = floor((square - 1) / 3);
+  column = (square - 1) % 3;
+  if (matrix[row][column] != ' ')
+  {
+    printf("Invalid play! That is already occupied!\n");
+    execute_play();
+    return;
+  }
+  matrix[row][column] = turn ? 'O' : 'X';
+  turn = !turn;
 }
