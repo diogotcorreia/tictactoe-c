@@ -1,57 +1,75 @@
+//C-based Tic-Tac-Toe game by Diogo Correia and João Joaquim
+
+//Libraries
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+//#include <conio.h>
 
-// Declare all variables
-
-/**
- * Stores all the board information
- * 0 means empty
- * 1 means player 1 (X)
- * 2 means player 2 (O)
- * 
- * board[0][1] indicates the value of the first row and second column
-*/
-int board[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
-
-// Declare all methods
-
-void start_game();
-
-void print_board();
+// Functions declaration
 
 void clear_screen();
+void rules_instructions();
+void start_board();
+void print_board();
+
+//Main
 
 int main()
 {
-  start_game();
+  clear_screen();
+  rules_instructions();
+  start_board();
+  print_board();
   return 0;
 }
 
-void start_game()
+// Declare all functions
+
+//Instruction printing function
+
+void rules_instructions()
 {
-  print_board();
+  printf("\n Welcome to this C-based Tic-Tac-Toe game by Diogo Correia and Joao Joaquim!\n");
+  printf("\n In order to win the game, you need to have three of your characters aligned, either vertically, horizontally or diagonally.\n");
+  printf("\n Player 1 plays with 'X' and Player 2 with 'O'.\n");
+  printf("\n Press CTRL+C at any time to exit.\n");
+  printf("\n Good luck! \n\n\n");
 }
+
+//Board array and starting function
+
+char matrix[3][3];
+
+void start_board()
+{
+  int i, j;
+  for (i = 0; i < 3; i++)
+  {
+    for (j = 0; j < 3; j++)
+    {
+      matrix[i][j] = ' ';
+    }
+  }
+}
+
+//Board printing function
 
 void print_board()
 {
-  //clear_screen();
-  // Loop through board
-  int i, j;
-
-  /* output each array element's value */
-  for (i = 0; i < 3; i++)
+  int k;
+  for (k = 0; k < 3; k++)
   {
-
-    for (j = 0; j < 3; j++)
+    printf(" %c | %c | %c ", matrix[k][0], matrix[k][1], matrix[k][2]);
+    if (k != 2)
     {
-      int gridItem = board[i][j];
-      char out = gridItem == 0 ? 'e' : gridItem == 1 ? 'X' : 'O';
-      printf("%c", out);
+      printf("\n---|---|---\n");
     }
-    printf("\n\u0196\n");
   }
+  printf("\n");
 }
+
+//Screen clearing function
 
 void clear_screen()
 {
