@@ -42,7 +42,8 @@ char winner = ' ';
 
 //Main
 
-int main() {
+int main()
+{
   clear_screen();
   rules_instructions();
   start_board();
@@ -52,7 +53,8 @@ int main() {
 
 //Instruction printing function
 
-void rules_instructions() {
+void rules_instructions()
+{
   printf("\n Welcome to this C-based Tic-Tac-Toe game by Diogo Correia and Joao Joaquim!\n");
   printf("\n In order to win the game, you must have three of your characters aligned, either vertically, horizontally or diagonally.\n");
   printf("\n Player 1 plays with 'X' and Player 2 with 'O'.\n");
@@ -62,10 +64,13 @@ void rules_instructions() {
 
 //Board starting function
 
-void start_board() {
+void start_board()
+{
   int i, j;
-  for (i = 0; i < 3; i++) {
-    for (j = 0; j < 3; j++) {
+  for (i = 0; i < 3; i++)
+  {
+    for (j = 0; j < 3; j++)
+    {
       matrix[i][j] = ' ';
     }
   }
@@ -73,7 +78,8 @@ void start_board() {
 
 //Board printing function
 
-void print_board() {
+void print_board()
+{
   int k, l;
   for (k = 0; k < 3; k++)
   {
@@ -112,96 +118,110 @@ void clear_screen()
 }
 
 //Game logic handling functions
- 
+
 void start_game()
 {
   // TODO while no one has won or it's a tie, repeat
-  do {
+  do
+  {
     verify_winner();
     winner = verify_winner();
-    if (winner != ' ') {
-      break;    
+    if (winner != ' ')
+    {
+      break;
     }
     print_board();
     execute_play();
     clear_screen();
   } while (winner == ' ');
-    if (winner != ' ') {
-    print_board();  
+  if (winner != ' ')
+  {
+    print_board();
     game_end();
   }
 }
 
 void execute_play()
 {
-    int square;
-    printf("Player %d (%c) turn: ", turn ? 2 : 1, turn ? 'O' : 'X');
-    scanf("%d", &square);
-    int row, column;
-    row = floor((square - 1) / 3);
-    column = (square - 1) % 3;
-    if (matrix[row][column] != ' ')
-    {
-      printf("Invalid play! That square has already been taken!\n");
-      execute_play();
-      return;
-    }     
-    matrix[row][column] = turn ? 'O' : 'X';
-    turn = !turn;   
+  int square;
+  printf("Player %d (%c) turn: ", turn ? 2 : 1, turn ? 'O' : 'X');
+  scanf("%d", &square);
+  int row, column;
+  row = floor((square - 1) / 3);
+  column = (square - 1) % 3;
+  if (matrix[row][column] != ' ')
+  {
+    printf("Invalid play! That square has already been taken!\n");
+    execute_play();
+    return;
+  }
+  matrix[row][column] = turn ? 'O' : 'X';
+  turn = !turn;
 }
 
 //Winner checking function
 
-char verify_winner() {
+char verify_winner()
+{
 
   //Verify rows
 
-  if (matrix[0][0] == matrix[0][1] && matrix[0][0] == matrix[0][2]) {        
-    return matrix[0][0];  
-  } 
-
-  if (matrix[1][0] == matrix[1][1] && matrix[1][0] == matrix[1][2]) {
-    return matrix[1][0];
-  }    
-
-  if (matrix[2][0] == matrix[2][1] && matrix[2][0] == matrix[2][2]) {
-    return matrix[2][0];
-  } 
-
-  //Verify columns
-  
-  if (matrix[0][0] == matrix [1][0] && matrix[0][0] == matrix[2][0]) {       
+  if (matrix[0][0] == matrix[0][1] && matrix[0][0] == matrix[0][2])
+  {
     return matrix[0][0];
   }
-     
-  if (matrix[0][1] == matrix [1][1] && matrix[0][1] == matrix[2][1]) {       
+
+  if (matrix[1][0] == matrix[1][1] && matrix[1][0] == matrix[1][2])
+  {
+    return matrix[1][0];
+  }
+
+  if (matrix[2][0] == matrix[2][1] && matrix[2][0] == matrix[2][2])
+  {
+    return matrix[2][0];
+  }
+
+  //Verify columns
+
+  if (matrix[0][0] == matrix[1][0] && matrix[0][0] == matrix[2][0])
+  {
+    return matrix[0][0];
+  }
+
+  if (matrix[0][1] == matrix[1][1] && matrix[0][1] == matrix[2][1])
+  {
     return matrix[0][1];
   }
 
-  if (matrix[0][2] == matrix [1][2] && matrix[0][2] == matrix[2][2]) {       
+  if (matrix[0][2] == matrix[1][2] && matrix[0][2] == matrix[2][2])
+  {
     return matrix[0][2];
   }
 
   //Verify diagonals
-  
-    if (matrix[0][0] == matrix[1][1] && matrix[0][0] == matrix[2][2]) {      
-      return matrix[0][0]; 
-    }
-    
-    if (matrix[0][2] == matrix[1][1] && matrix[0][2] == matrix[2][0]) {    
-      return matrix[0][2];  
-    }
+
+  if (matrix[0][0] == matrix[1][1] && matrix[0][0] == matrix[2][2])
+  {
+    return matrix[0][0];
+  }
+
+  if (matrix[0][2] == matrix[1][1] && matrix[0][2] == matrix[2][0])
+  {
+    return matrix[0][2];
+  }
 }
 
 //Game ending function
 
-void game_end() {
+void game_end()
+{
   winner = verify_winner();
-  if (winner == 'X') {
+  if (winner == 'X')
+  {
     printf("\nPlayer 1 won!\n");
-  }  
-  if (winner == 'O') {
+  }
+  if (winner == 'O')
+  {
     printf("\nPlayer 2 won!\n");
-  } 
+  }
 }
-
