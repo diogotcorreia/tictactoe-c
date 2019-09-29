@@ -155,7 +155,6 @@ void execute_play()
 //Winner checking function
 
 char verify_winner() {
-  int m, n;
 
   //Verify rows
 
