@@ -199,10 +199,10 @@ char verify_winner() {
 void game_end() {
   winner = verify_winner();
   if (winner == 'X') {
-    printf("Player 1 won!");
+    printf("\nPlayer 1 won!\n");
   }  
   if (winner == 'O') {
-    printf("Player 2 won!");
+    printf("\nPlayer 2 won!\n");
   } 
 }
 
