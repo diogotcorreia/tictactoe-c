@@ -36,10 +36,6 @@ char matrix[3][3];
 
 bool turn = false;
 
-//This boolean keeps the game going as long as it is true
-
-bool game = true;
-
 //Winner
 
 char winner = ' ';
@@ -63,6 +59,8 @@ void rules_instructions() {
   printf("\n Press CTRL + C at any time to exit.\n");
   printf("\n Good luck! \n\n\n");
 }
+
+//Board starting function
 
 void start_board() {
   int i, j;
@@ -113,7 +111,7 @@ void clear_screen()
   system("@cls||clear");
 }
 
-//Game logic handling function
+//Game logic handling functions
  
 void start_game()
 {
@@ -194,6 +192,8 @@ char verify_winner() {
       return matrix[0][2];  
     }
 }
+
+//Game ending function
 
 void game_end() {
   winner = verify_winner();
