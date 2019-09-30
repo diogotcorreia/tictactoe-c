@@ -1,22 +1,18 @@
-//C-based Tic-Tac-Toe game by Diogo Correia and João Joaquim
+// C-based Tic-Tac-Toe game by Diogo Correia and João Joaquim
 
-//Libraries
+// Libraries
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
-//#include <conio.h>
 
+// Define constants
 #define ANSI_COLOR_RED "\x1b[31m"
-#define ANSI_COLOR_GREEN "\x1b[32m"
 #define ANSI_COLOR_YELLOW "\x1b[33m"
 #define ANSI_COLOR_BLUE "\x1b[34m"
-#define ANSI_COLOR_MAGENTA "\x1b[35m"
-#define ANSI_COLOR_CYAN "\x1b[36m"
 #define ANSI_COLOR_RESET "\x1b[0m"
 
-// Variable declaration
-
+// Function declaration
 void clear_screen();
 void rules_instructions();
 void start_board();
@@ -27,22 +23,18 @@ char verify_winner();
 bool is_tie();
 void game_end(char winner);
 
-//Board array and starting function
-
+// Board array and starting function
 char matrix[3][3];
 
 // This boolean defines which player is playing.
 // False means Player 1 (X)
 // True means Player 2 (O)
-
 bool turn = false;
 
-//Winner
-
+// The winner of the game.
 char winner = ' ';
 
-//Main
-
+// The main function. This is what handles the game start.
 int main()
 {
   clear_screen();
@@ -52,33 +44,27 @@ int main()
   return 0;
 }
 
-//Instruction printing function
-
+// Prints the instructions to the console.
 void rules_instructions()
 {
-  printf("\n Welcome to this C-based Tic-Tac-Toe game by Diogo Correia and Joao Joaquim!\n");
+  printf("\n Welcome to this C-based Tic-Tac-Toe game by Diogo Correia and João Joaquim!\n");
   printf("\n In order to win the game, you must have three of your characters aligned, either vertically, horizontally or diagonally.\n");
-  printf("\n Player 1 plays with 'X' and Player 2 with 'O'.\n");
+  printf("\n Player 1 plays with 'X' and Player 2 with 'O'.");
+  printf("\n To select a square, type the number of the square.\n");
   printf("\n Press CTRL + C at any time to exit.\n");
   printf("\n Good luck! \n\n\n");
 }
 
-//Board starting function
-
+// Initializes an empty board.
 void start_board()
 {
   int i, j;
   for (i = 0; i < 3; i++)
-  {
     for (j = 0; j < 3; j++)
-    {
       matrix[i][j] = ' ';
-    }
-  }
 }
 
-//Board printing function
-
+// Prints the current board to the console.
 void print_board()
 {
   int k, l;
@@ -110,19 +96,17 @@ void print_board()
   printf("\n\n");
 }
 
-//Screen clearing function
-
+// Cleans the screen.
 void clear_screen()
 {
   system("@cls||clear");
 }
 
-//Game logic handling functions
-
+// Handles the game logic.
 void start_game()
 {
-  // TODO while no one has won or it's a tie, repeat
   char winner = ' ';
+  // Keep the game running while no one wins and there is no tie.
   do
   {
     print_board();
@@ -135,6 +119,7 @@ void start_game()
   game_end(winner);
 }
 
+// Executes a round on the game.
 void execute_play()
 {
   int square;
@@ -153,11 +138,23 @@ void execute_play()
   turn = !turn;
 }
 
-//Winner checking function
-
+// Checks if there is a winner. Does not check ties.
 char verify_winner()
 {
-
+  int possibilities[8][3] = {
+      {0, 1, 2},
+      {3, 4, 5},
+      {6, 7, 8},
+      {0, 3, 6},
+      {1, 4, 7},
+      {2, 5, 8},
+      {0, 4, 8},
+      {2, 4, 6},
+  };
+  int i;
+  for (i = 0; i < 8; i++)
+  {
+  }
   //Verify rows
 
   if (matrix[0][0] == matrix[0][1] && matrix[0][0] == matrix[0][2])
@@ -206,6 +203,7 @@ char verify_winner()
   return ' ';
 }
 
+// Checks if there is a tie.
 bool is_tie()
 {
   int i, j;
@@ -216,8 +214,7 @@ bool is_tie()
   return true;
 }
 
-//Game ending function
-
+// Ends the game.
 void game_end(char winner)
 {
   switch (winner)
