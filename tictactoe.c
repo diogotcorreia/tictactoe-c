@@ -24,6 +24,7 @@ void print_board();
 void start_game();
 void execute_play();
 char verify_winner();
+bool is_tie();
 void game_end(char winner);
 
 //Board array and starting function
@@ -101,7 +102,6 @@ void print_board()
         printf("|");
       }
     }
-    //printf(" " ANSI_COLOR_RED "%c" ANSI_COLOR_RESET " | %c | %c ", matrix[k][0], matrix[k][1], matrix[k][2]);
     if (k != 2)
     {
       printf("\n---|---|---\n");
@@ -130,7 +130,7 @@ void start_game()
     clear_screen();
     winner = verify_winner();
     printf("Winner: %c\n", winner);
-  } while (winner == ' ');
+  } while (winner == ' ' && !is_tie());
   print_board();
   game_end(winner);
 }
@@ -206,16 +206,29 @@ char verify_winner()
   return ' ';
 }
 
+bool is_tie()
+{
+  int i, j;
+  for (i = 0; i < 3; i++)
+    for (j = 0; j < 3; j++)
+      if (matrix[i][j] == ' ')
+        return false;
+  return true;
+}
+
 //Game ending function
 
 void game_end(char winner)
 {
-  if (winner == 'X')
+  switch (winner)
   {
+  case 'X':
     printf("\nPlayer 1 won!\n");
-  }
-  if (winner == 'O')
-  {
+    break;
+  case 'O':
     printf("\nPlayer 2 won!\n");
+    break;
+  default:
+    printf("\nIt's a tie!\n");
   }
 }
