@@ -20,6 +20,7 @@ void print_board();
 void start_game();
 void execute_play();
 char verify_winner();
+char getMatrixAt();
 bool is_tie();
 void game_end(char winner);
 
@@ -153,54 +154,18 @@ char verify_winner()
   };
   int i;
   for (i = 0; i < 8; i++)
-  {
-  }
-  //Verify rows
-
-  if (matrix[0][0] == matrix[0][1] && matrix[0][0] == matrix[0][2])
-  {
-    return matrix[0][0];
-  }
-
-  if (matrix[1][0] == matrix[1][1] && matrix[1][0] == matrix[1][2])
-  {
-    return matrix[1][0];
-  }
-
-  if (matrix[2][0] == matrix[2][1] && matrix[2][0] == matrix[2][2])
-  {
-    return matrix[2][0];
-  }
-
-  //Verify columns
-
-  if (matrix[0][0] == matrix[1][0] && matrix[0][0] == matrix[2][0])
-  {
-    return matrix[0][0];
-  }
-
-  if (matrix[0][1] == matrix[1][1] && matrix[0][1] == matrix[2][1])
-  {
-    return matrix[0][1];
-  }
-
-  if (matrix[0][2] == matrix[1][2] && matrix[0][2] == matrix[2][2])
-  {
-    return matrix[0][2];
-  }
-
-  //Verify diagonals
-
-  if (matrix[0][0] == matrix[1][1] && matrix[0][0] == matrix[2][2])
-  {
-    return matrix[0][0];
-  }
-
-  if (matrix[0][2] == matrix[1][1] && matrix[0][2] == matrix[2][0])
-  {
-    return matrix[0][2];
-  }
+    if (getMatrixAt(possibilities[i][0]) != ' ' && getMatrixAt(possibilities[i][0]) == getMatrixAt(possibilities[i][1]) && getMatrixAt(possibilities[i][0]) == getMatrixAt(possibilities[i][2]))
+      return getMatrixAt(possibilities[i][0]);
   return ' ';
+}
+
+// Get content of slot from 0-8 number
+char getMatrixAt(int slot)
+{
+  int row, column;
+  row = floor(slot / 3);
+  column = slot % 3;
+  return matrix[row][column];
 }
 
 // Checks if there is a tie.
