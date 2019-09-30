@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include <math.h>
 
-// Define constants
+// Define constants (Colors)
 #define ANSI_COLOR_RED "\x1b[31m"
 #define ANSI_COLOR_YELLOW "\x1b[33m"
 #define ANSI_COLOR_BLUE "\x1b[34m"
@@ -50,8 +50,8 @@ void rules_instructions()
 {
   printf("\n Welcome to this C-based Tic-Tac-Toe game by Diogo Correia and João Joaquim!\n");
   printf("\n In order to win the game, you must have three of your characters aligned, either vertically, horizontally or diagonally.\n");
-  printf("\n Player 1 plays with 'X' and Player 2 with 'O'.");
-  printf("\n To select a square, type the number of the square.\n");
+  printf("\n Player 1 plays with 'X' and Player 2 with 'O'.\n");
+  printf("\n To start playing, choose the number correspondent to the square you wish to occupy, and press ENTER.\n");
   printf("\n Press CTRL + C at any time to exit.\n");
   printf("\n Good luck! \n\n\n");
 }
@@ -114,7 +114,7 @@ void start_game()
     execute_play();
     clear_screen();
     winner = verify_winner();
-    printf("Winner: %c\n", winner);
+    printf("\nWinner: %c\n", winner);
   } while (winner == ' ' && !is_tie());
   print_board();
   game_end(winner);
@@ -124,14 +124,14 @@ void start_game()
 void execute_play()
 {
   int square;
-  printf("Player %d (%c) turn: ", turn ? 2 : 1, turn ? 'O' : 'X');
+  printf("\nPlayer %d (%c) turn: ", turn ? 2 : 1, turn ? 'O' : 'X');
   scanf("%d", &square);
   int row, column;
   row = floor((square - 1) / 3);
   column = (square - 1) % 3;
   if (matrix[row][column] != ' ')
   {
-    printf("Invalid play! That square has already been taken!\n");
+    printf("\nInvalid play! That square has already been taken!\n");
     execute_play();
     return;
   }
@@ -171,10 +171,10 @@ char getMatrixAt(int slot)
 // Checks if there is a tie.
 bool is_tie()
 {
-  int i, j;
-  for (i = 0; i < 3; i++)
-    for (j = 0; j < 3; j++)
-      if (matrix[i][j] == ' ')
+  int p, q;
+  for (p = 0; p < 3; p++)
+    for (q = 0; q < 3; q++)
+      if (matrix[p][q] == ' ')
         return false;
   return true;
 }
