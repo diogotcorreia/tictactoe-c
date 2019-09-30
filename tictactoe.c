@@ -192,4 +192,9 @@ void game_end(char winner)
   default:
     printf("\nIt's a tie!\n");
   }
+  printf("Press ENTER to exit.\n");
+  // This waits for an ENTER press;
+  char ch;
+  scanf("%c", &ch);
+  scanf("%c", &ch);
 }
