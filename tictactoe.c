@@ -114,7 +114,6 @@ void start_game()
     execute_play();
     clear_screen();
     winner = verify_winner();
-    printf("\nWinner: %c\n", winner);
   } while (winner == ' ' && !is_tie());
   print_board();
   game_end(winner);
