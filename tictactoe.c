@@ -24,7 +24,7 @@ void print_board();
 void start_game();
 void execute_play();
 char verify_winner();
-void game_end();
+void game_end(char winner);
 
 //Board array and starting function
 
@@ -122,23 +122,17 @@ void clear_screen()
 void start_game()
 {
   // TODO while no one has won or it's a tie, repeat
+  char winner = ' ';
   do
   {
-    verify_winner();
-    winner = verify_winner();
-    if (winner != ' ')
-    {
-      break;
-    }
     print_board();
     execute_play();
     clear_screen();
+    winner = verify_winner();
+    printf("Winner: %c\n", winner);
   } while (winner == ' ');
-  if (winner != ' ')
-  {
-    print_board();
-    game_end();
-  }
+  print_board();
+  game_end(winner);
 }
 
 void execute_play()
@@ -209,13 +203,13 @@ char verify_winner()
   {
     return matrix[0][2];
   }
+  return ' ';
 }
 
 //Game ending function
 
-void game_end()
+void game_end(char winner)
 {
-  winner = verify_winner();
   if (winner == 'X')
   {
     printf("\nPlayer 1 won!\n");
