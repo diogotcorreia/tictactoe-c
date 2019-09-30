@@ -7,6 +7,8 @@
 #include <math.h>
 //#include <conio.h>
 
+//Color declaration
+
 #define ANSI_COLOR_RED "\x1b[31m"
 #define ANSI_COLOR_GREEN "\x1b[32m"
 #define ANSI_COLOR_YELLOW "\x1b[33m"
@@ -59,6 +61,7 @@ void rules_instructions()
   printf("\n Welcome to this C-based Tic-Tac-Toe game by Diogo Correia and Joao Joaquim!\n");
   printf("\n In order to win the game, you must have three of your characters aligned, either vertically, horizontally or diagonally.\n");
   printf("\n Player 1 plays with 'X' and Player 2 with 'O'.\n");
+  printf("\n To start playing, choose the number correspondent to the square you wish to occupy, and press ENTER.\n");
   printf("\n Press CTRL + C at any time to exit.\n");
   printf("\n Good luck! \n\n\n");
 }
@@ -129,7 +132,7 @@ void start_game()
     execute_play();
     clear_screen();
     winner = verify_winner();
-    printf("Winner: %c\n", winner);
+    printf("\nWinner: %c\n", winner);
   } while (winner == ' ' && !is_tie());
   print_board();
   game_end(winner);
@@ -138,14 +141,14 @@ void start_game()
 void execute_play()
 {
   int square;
-  printf("Player %d (%c) turn: ", turn ? 2 : 1, turn ? 'O' : 'X');
+  printf("\nPlayer %d (%c) turn: ", turn ? 2 : 1, turn ? 'O' : 'X');
   scanf("%d", &square);
   int row, column;
   row = floor((square - 1) / 3);
   column = (square - 1) % 3;
   if (matrix[row][column] != ' ')
   {
-    printf("Invalid play! That square has already been taken!\n");
+    printf("\nInvalid play! That square has already been taken!\n");
     execute_play();
     return;
   }
@@ -157,39 +160,22 @@ void execute_play()
 
 char verify_winner()
 {
+  int m, n;
 
   //Verify rows
 
-  if (matrix[0][0] == matrix[0][1] && matrix[0][0] == matrix[0][2])
-  {
-    return matrix[0][0];
-  }
-
-  if (matrix[1][0] == matrix[1][1] && matrix[1][0] == matrix[1][2])
-  {
-    return matrix[1][0];
-  }
-
-  if (matrix[2][0] == matrix[2][1] && matrix[2][0] == matrix[2][2])
-  {
-    return matrix[2][0];
+  for (m = 0; m < 3; m++) {
+    if (matrix[m][0] == matrix[m][1] && matrix[m][0] == matrix[m][2]) {
+      return matrix[m][0];
+    }  
   }
 
   //Verify columns
 
-  if (matrix[0][0] == matrix[1][0] && matrix[0][0] == matrix[2][0])
-  {
-    return matrix[0][0];
-  }
-
-  if (matrix[0][1] == matrix[1][1] && matrix[0][1] == matrix[2][1])
-  {
-    return matrix[0][1];
-  }
-
-  if (matrix[0][2] == matrix[1][2] && matrix[0][2] == matrix[2][2])
-  {
-    return matrix[0][2];
+  for (n = 0; n < 3; n++) {
+    if (matrix[0][n] == matrix[1][n] && matrix[0][n] == matrix[2][n]) {
+      return matrix[0][n];
+    }  
   }
 
   //Verify diagonals
@@ -208,10 +194,10 @@ char verify_winner()
 
 bool is_tie()
 {
-  int i, j;
-  for (i = 0; i < 3; i++)
-    for (j = 0; j < 3; j++)
-      if (matrix[i][j] == ' ')
+  int p, q;
+  for (p = 0; p < 3; p++)
+    for (q = 0; q < 3; q++)
+      if (matrix[p][q] == ' ')
         return false;
   return true;
 }
